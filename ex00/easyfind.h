@@ -5,12 +5,7 @@
 # include <iterator>
 
 template<typename T>
-typename T::iterator	easyfind(T box, int num);
-class NotFoundException: public std::exception
-{
-public:
-	virtual const char *what() const throw();
-};
+typename T::iterator	easyfind(T &box, int num);
 
 # include "easyfind.tpp"
 

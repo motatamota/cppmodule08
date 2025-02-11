@@ -7,10 +7,10 @@ class Span
 private:
 	int	*box_;
 	int	size_;
-	int	many_;
+	int	reserve_;
+	Span();
 
 public:
-	Span();
 	Span(unsigned int N);
 	Span(const Span &other);
 	Span	&operator=(const Span &other);

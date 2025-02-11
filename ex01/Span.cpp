@@ -1,15 +1,15 @@
 #include "Span.h"
 
-Span::Span() : box_(0), size_(0), many_(0)
+Span::Span() : box_(0), size_(0), reserve_(0)
 {
 }
 
-Span::Span(unsigned int N) : box_(new int[N]()), size_(N), many_(0)
+Span::Span(unsigned int N) : box_(new int[N]()), size_(N), reserve_(0)
 {
 
 }
 
-Span::Span(const Span &other) : box_(0), size_(0), many_(0)
+Span::Span(const Span &other) : box_(0), size_(0), reserve_(0)
 {
 	*this = other;
 }
@@ -21,8 +21,8 @@ Span	&Span::operator=(const Span &other)
 		delete[] box_;
 		box_ = new int[other.size_]();
 		size_ = other.size_;
-		many_ = other.many_;
-		for (int n = 0; n < other.many_; n++)
+		reserve_ = other.reserve_;
+		for (int n = 0; n < other.reserve_; n++)
 			box_[n] = other.box_[n];
 	}
 	return (*this);
@@ -35,10 +35,10 @@ Span::~Span()
 
 void	Span::addNumber(int num)
 {
-	if (many_ == size_)
+	if (reserve_ == size_)
 		throw (FillContentException());
-	box_[many_] = num;
-	many_++;
+	box_[reserve_] = num;
+	reserve_++;
 }
 
 unsigned int	Span::shortestSpan()
@@ -47,11 +47,11 @@ unsigned int	Span::shortestSpan()
 	long			tmp;
 
 	ans = __UINT32_MAX__;
-	if (many_ < 2)
+	if (reserve_ < 2)
 		throw (LowSizeException());
-	for (int n = 0; n < many_ - 1; n++)
+	for (int n = 0; n < reserve_ - 1; n++)
 	{
-		for (int m = n + 1; m < many_; m++)
+		for (int m = n + 1; m < reserve_; m++)
 		{
 			tmp = box_[m] - box_[n];
 			if (tmp < 0)
@@ -69,13 +69,15 @@ unsigned int	Span::longestSpan()
 	long	tmp;
 
 	ans = 0;
-	if (many_ < 2)
+	if (reserve_ < 2)
 		throw (LowSizeException());
-	for (int n = 0; n < many_ - 1; n++)
+	for (int n = 0; n < reserve_ - 1; n++)
 	{
-		for (int m = n + 1; m < many_; m++)
+		for (int m = n + 1; m < reserve_; m++)
 		{
-			tmp = box_[m] + box_[n];
+			tmp = box_[m] - box_[n];
+			if (tmp < 0)
+				tmp = -tmp;
 			if (tmp > ans)
 				ans = tmp;
 		}

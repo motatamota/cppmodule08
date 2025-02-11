@@ -1,6 +1,6 @@
 NAME = ex00
 FLAG = -Wall -Wextra -Werror -std=c++98
-SRC = main.cpp easyfind.cpp
+SRC = main.cpp
 OBJ = $(SRC:.cpp=.o)
 CC = g++
 

@@ -8,20 +8,17 @@ int	main()
 	int	size = 4;
 	int	search = 15;
 
-	std::vector<int> box(size);
+	std::vector<int> box;
 	for (int n = 0; n < size; n++)
 	{
 		num *= num;
-		box[n] = num;
+		box.push_back(num);
 		std::cout << box[n] << ", ";
 	}
 	std::cout << std::endl;
-	try
-	{
-		std::cout << *easyfind(box, search) << std::endl;
-	}
-	catch (std::exception &e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
+	std::vector<int>::iterator it = easyfind(box, search);
+	if (it == box.end())
+		std::cout << "Not found" << std::endl;
+	else
+		std::cout << *it << std::endl;
 }
