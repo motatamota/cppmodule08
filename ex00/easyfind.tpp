@@ -7,8 +7,6 @@ typename T::iterator	easyfind(T box, int num)
 
 	it = find(box.begin(), box.end(), num);
 	if (it == box.end())
-	{
 		throw (NotFoundException());
-	}
 	return (it);
 }

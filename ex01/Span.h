@@ -5,6 +5,9 @@
 class Span
 {
 private:
+	int	*box_;
+	int	size_;
+	int	many_;
 
 public:
 	Span();
@@ -13,10 +16,15 @@ public:
 	Span	&operator=(const Span &other);
 	~Span();
 
-	void	addNumber();
-	unsigned int	shortSpan();
-	unsigned int	longSpan();
-	class FillContentException : std::exception
+	void	addNumber(int num);
+	unsigned int	shortestSpan();
+	unsigned int	longestSpan();
+	class FillContentException : public std::exception
+	{
+	public:
+		virtual const char	*what() const throw();
+	};
+	class LowSizeException : public std::exception
 	{
 	public:
 		virtual const char	*what() const throw();
