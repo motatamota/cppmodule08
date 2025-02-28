@@ -87,10 +87,10 @@ unsigned int	Span::longestSpan()
 
 const char	*Span::FillContentException::what() const throw()
 {
-	return ("Contents is fill.");
+	return ("Contents is full.");
 }
 
 const char	*Span::LowSizeException::what() const throw()
 {
-	return ("Don't havu enough contents.");
+	return ("Not have enough contents.");
 }
